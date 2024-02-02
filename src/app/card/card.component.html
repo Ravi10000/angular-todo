@@ -1,0 +1,59 @@
+<!-- <input type="text" (input)="setTitle($event)" /> -->
+<!-- <h2>{{ title }}</h2>
+<input type="text" [(ngModel)]="title" />
+<button [disabled]="toggleVisibility()">Like</button>
+
+<button (click)="toggleVisibility()">Toggle</button>
+<p *ngIf="isVisible; else test">Message Visible</p>
+<ng-template #test>
+  <p>Message Hidden</p>
+</ng-template> -->
+<div class="flex gap-2 flex-col w-screen max-w-[450px]">
+  <div
+    class="container bg-slate-50 flex flex-col items-center gap-5 p-5 m-auto rounded-lg"
+  >
+    <h2 class="text-red-400 font-bold text-xl">
+      {{ "👉Todos👈" | uppercase }}
+    </h2>
+    <!-- <p class="font-bold">{{ item }}</p> -->
+    <textarea
+      placeholder="Add a task..."
+      [(ngModel)]="item"
+      class="px-3 py-1 w-full max-w-[400px] h-20 bg-slate-200 focus:outline-1 focus:outline-red-400 rounded-md resize-none"
+    ></textarea>
+    <button
+      class="bg-blue-500 w-full max-w-[200px] px-4 py-2 rounded-lg text-white font-medium"
+      (click)="addToList()"
+    >
+      Add 🚀
+    </button>
+    <!-- <ul class="flex flex-col gap-3 w-full max-w-[400px]">
+      <li
+        *ngFor="let item of list; let i = index"
+        class="flex justify-between w-full bg-slate-100 p-3"
+      >
+        <span>{{ item }}</span>
+        <button (click)="removeFromList(i)">❌</button>
+      </li>
+    </ul> -->
+  </div>
+  <div
+    class="container bg-slate-50 flex flex-col items-center gap-5 p-5 m-auto rounded-lg h-[350px]"
+  >
+    <ul
+      *ngIf="list.length > 0; else emptyMsg"
+      class="flex flex-col gap-3 w-full max-w-[400px] h-full overflow-auto"
+    >
+      <li
+        *ngFor="let item of list; let i = index"
+        class="flex justify-between w-full bg-slate-100 p-3"
+      >
+        <span>{{ item }}</span>
+        <button (click)="removeFromList(i)">❌</button>
+      </li>
+    </ul>
+    <ng-template #emptyMsg>
+      <p class="opacity-50">😐 Add a task</p>
+    </ng-template>
+  </div>
+</div>
