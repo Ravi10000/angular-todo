@@ -8,52 +8,62 @@
 <ng-template #test>
   <p>Message Hidden</p>
 </ng-template> -->
-<div class="flex gap-2 flex-col w-screen max-w-[450px]">
+<div class="flex gap-2 flex-col w-screen max-w-[450px] relative">
+  <img
+    src="../../assets/notes.png"
+    class="absolute text-[100px] left-1/2 -translate-x-1/2 -translate-y-[60px] top-0 h-20 aspect-auto"
+  />
   <div
-    class="container bg-slate-50 flex flex-col items-center gap-5 p-5 m-auto rounded-lg"
+    class="container bg-slate-50/40 flex flex-col items-center gap-5 p-5 m-auto rounded-lg"
   >
-    <h2 class="text-red-400 font-bold text-xl">
-      {{ "👉Todos👈" | uppercase }}
+    <h2 class="text-red-400 font-bold text-3xl">
+      {{ "👉 NG Task 👈" | uppercase }}
     </h2>
-    <!-- <p class="font-bold">{{ item }}</p> -->
-    <textarea
-      placeholder="Add a task..."
+    <input
+      placeholder="Type here..."
       [(ngModel)]="item"
-      class="px-3 py-1 w-full max-w-[400px] h-20 bg-slate-200 focus:outline-1 focus:outline-red-400 rounded-md resize-none"
-    ></textarea>
+      class="p-3 w-full max-w-[400px] bg-slate-200 focus:outline-1 focus:outline-red-400 rounded-md resize-none"
+      #inputBox
+    />
     <button
-      class="bg-blue-500 w-full max-w-[200px] px-4 py-2 rounded-lg text-white font-medium"
-      (click)="addToList()"
+      class="bg-blue-500 w-full px-4 py-3 rounded-lg text-white font-medium active:scale-95 transition-all"
+      (click)="addToList(inputBox)"
     >
       Add 🚀
     </button>
-    <!-- <ul class="flex flex-col gap-3 w-full max-w-[400px]">
-      <li
-        *ngFor="let item of list; let i = index"
-        class="flex justify-between w-full bg-slate-100 p-3"
-      >
-        <span>{{ item }}</span>
-        <button (click)="removeFromList(i)">❌</button>
-      </li>
-    </ul> -->
   </div>
   <div
-    class="container bg-slate-50 flex flex-col items-center gap-5 p-5 m-auto rounded-lg h-[350px]"
+    class="container flex flex-col items-center gap-5 py-5 m-auto rounded-lg"
   >
     <ul
       *ngIf="list.length > 0; else emptyMsg"
-      class="flex flex-col gap-3 w-full max-w-[400px] h-full overflow-auto"
+      class="flex flex-col gap-3 w-full max-h-[350px] overflow-auto"
     >
-      <li
-        *ngFor="let item of list; let i = index"
-        class="flex justify-between w-full bg-slate-100 p-3"
-      >
-        <span>{{ item }}</span>
-        <button (click)="removeFromList(i)">❌</button>
+      <li *ngFor="let item of list; let i = index">
+        <label
+          for="item-{{ i }}"
+          [ngClass]="{ finished: item.isFinished }"
+          class="flex items-center gap-2 w-full bg-slate-100 p-3 cursor-pointer group relative rounded-lg text-slate-800 font-medium transition-all"
+        >
+          <input
+            id="item-{{ i }}"
+            type="checkbox"
+            class="accent-blue-500 h-5 rounded-md bg-slate-100 aspect-square"
+            [(ngModel)]="item.isFinished"
+            (change)="updateList()"
+          />
+          <span>{{ item.name }}</span>
+          <button
+            (click)="removeFromList(i)"
+            class="bg-red-50 h-8 aspect-square rounded-full active:scale-95 transition-all ml-auto hidden group-hover:flex items-center justify-center absolute right-2 top-1/2 -translate-y-1/2"
+          >
+            <span class="text-sm">❌</span>
+          </button>
+        </label>
       </li>
     </ul>
     <ng-template #emptyMsg>
-      <p class="opacity-50">😐 Add a task</p>
+      <p class="opacity-50">😐 Your tasks will appear here</p>
     </ng-template>
   </div>
 </div>

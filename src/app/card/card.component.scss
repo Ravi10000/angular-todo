@@ -1,0 +1,24 @@
+.finished {
+  position: relative;
+  opacity: 0.5;
+  transform: scale(0.98);
+  &::before {
+    content: "";
+    height: 1px;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #3b82f6;
+    animation: cross 0.3s ease-in-out;
+  }
+}
+@keyframes cross {
+  from {
+    left: -100%;
+  }
+  to {
+    left: 0;
+  }
+}
