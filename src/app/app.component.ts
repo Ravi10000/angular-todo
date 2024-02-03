@@ -10,5 +10,5 @@ import { CardComponent } from './card/card.component';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'basics';
+  title = 'ng-task';
 }
